@@ -38,7 +38,6 @@ public class EmployeeController {
                                  @RequestParam String lastName) {
         Employee employee = new Employee(firstName, lastName);
         return employeeService.find(firstName, lastName);
-
     }
 
     @GetMapping("/get")

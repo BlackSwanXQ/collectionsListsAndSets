@@ -15,5 +15,5 @@ public interface EmployeeService {
 
     Employee find(String firstName, String lastName);
 
-    Collection<Employee> get();
+    List<Employee> get();
 }
