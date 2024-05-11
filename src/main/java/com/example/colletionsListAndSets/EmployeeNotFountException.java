@@ -10,6 +10,5 @@ public class EmployeeNotFountException extends RuntimeException {
     }
 
     public EmployeeNotFountException() {
-
     }
 }

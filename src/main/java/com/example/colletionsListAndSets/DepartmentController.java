@@ -33,7 +33,6 @@ public class DepartmentController {
     public Collection<Employee> allEmployeeDepartment(@RequestParam Integer department) {
         return departmentService.employeeDepartment(department);
     }
-
     @GetMapping(value = "/all")
     public Map<Integer,List<Employee>> allEmployee() {
         return departmentService.allEmployee();

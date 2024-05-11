@@ -61,7 +61,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     private String buildKey(String firstname, String lastname) {
         return firstname + lastname;
     }
-
     @Override
     public Collection<Employee> getAll() {
         return employees.values();

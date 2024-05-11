@@ -39,6 +39,7 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .stream()
                 .filter(e -> e.getDepartment() == department)
                 .collect(Collectors.toList());
+
     }
 
     @Override

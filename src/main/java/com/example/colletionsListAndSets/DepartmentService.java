@@ -12,4 +12,5 @@ public interface DepartmentService {
     Collection<Employee> employeeDepartment(int department);
 
     Map<Integer, List<Employee>> allEmployee();
+
 }

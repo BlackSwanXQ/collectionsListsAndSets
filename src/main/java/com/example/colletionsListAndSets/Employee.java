@@ -31,7 +31,6 @@ public class Employee {
     public int getDepartment() {
         return department;
     }
-
     @Override
     public String toString() {
         return "Employee{" +
