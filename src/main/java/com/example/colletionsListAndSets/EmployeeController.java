@@ -3,6 +3,8 @@ package com.example.colletionsListAndSets;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -21,22 +23,23 @@ public class EmployeeController {
 
     @GetMapping("/add")
     public Employee addEmployee(@RequestParam String firstName,
-                                @RequestParam String lastName) {
+                                @RequestParam String lastName,
+                                @RequestParam Integer salary,
+                                @RequestParam Integer department) {
 
-        return employeeService.add(firstName, lastName);
+        return employeeService.add(firstName, lastName, salary, department);
     }
 
     @GetMapping("/remove")
     public Employee removeEmployee(@RequestParam String firstName,
                                    @RequestParam String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+//        Employee employee = new Employee(firstName, lastName);
         return employeeService.remove(firstName, lastName);
     }
 
     @GetMapping("/find")
     public Employee findEmployee(@RequestParam String firstName,
                                  @RequestParam String lastName) {
-        Employee employee = new Employee(firstName, lastName);
         return employeeService.find(firstName, lastName);
     }
 
@@ -44,6 +47,5 @@ public class EmployeeController {
     public Collection<Employee> getEmployees() {
         return employeeService.get();
     }
-
 
 }

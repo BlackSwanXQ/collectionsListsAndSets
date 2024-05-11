@@ -3,6 +3,7 @@ package com.example.colletionsListAndSets;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -20,46 +21,50 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee add(String firstName, String lastName) {
-        String key = firstName + lastName;
-        Employee employee = new Employee(firstName, lastName);
+    public Employee add(String firstName, String lastName, Integer salary, Integer department) {
+        String key = buildKey(firstName, lastName);
         if (employees.containsKey(key)) {
-            throw new EmployeeAlreadyAddedException("Employee alrady exist");
+            throw new EmployeeAlreadyAddedException("Employee already exist");
         }
         if (employees.size() >= employeesMax) {
             throw new EmployeeStoragelsFullException("List is overflowing");
         }
+        Employee employee = new Employee(firstName, lastName, salary, department);
         employees.put(key, employee);
-        System.out.println(employees);
         return employee;
     }
 
     @Override
     public Employee remove(String firstName, String lastName) {
-        String key = firstName + lastName;
-        Employee employee = new Employee(firstName, lastName);
+        String key = buildKey(firstName, lastName);
         if (employees.containsKey(key)) {
-            employees.remove(key);
-            return employee;
+            return employees.remove(key);
         }
         throw new EmployeeNotFountException("Employee not found");
     }
 
     @Override
     public Employee find(String firstName, String lastName) {
-        String key = firstName + lastName;
-        Employee employee = new Employee(firstName, lastName);
+        String key = buildKey(firstName, lastName);
         if (employees.containsKey(key)) {
-            return employee;
+            return employees.get(key);
         }
         throw new EmployeeNotFountException("Employee not found");
     }
 
     @Override
-    public List<Employee> get() {
-//        return Collections.unmodifiableList(employees);
-        List<Employee> lst = new ArrayList<>(employees.values());
-        return Collections.unmodifiableList(lst);
+    public Collection<Employee> get() {
+        return Collections.unmodifiableCollection(employees.values());
+    }
+
+
+    private String buildKey(String firstname, String lastname) {
+        return firstname + lastname;
+    }
+
+    @Override
+    public Collection<Employee> getAll() {
+        return employees.values();
     }
 }
 
