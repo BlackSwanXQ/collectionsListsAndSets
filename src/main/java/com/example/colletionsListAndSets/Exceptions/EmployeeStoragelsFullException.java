@@ -1,4 +1,4 @@
-package com.example.colletionsListAndSets;
+package com.example.colletionsListAndSets.Exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

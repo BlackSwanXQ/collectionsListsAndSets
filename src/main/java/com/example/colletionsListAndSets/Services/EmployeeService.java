@@ -1,7 +1,8 @@
-package com.example.colletionsListAndSets;
+package com.example.colletionsListAndSets.Services;
+
+import com.example.colletionsListAndSets.Employee.Employee;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface EmployeeService {
     String greet();

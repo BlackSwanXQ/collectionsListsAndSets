@@ -1,5 +1,7 @@
-package com.example.colletionsListAndSets;
+package com.example.colletionsListAndSets.Controllers;
 
+import com.example.colletionsListAndSets.Services.DepartmentService;
+import com.example.colletionsListAndSets.Employee.Employee;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/employee/departments")

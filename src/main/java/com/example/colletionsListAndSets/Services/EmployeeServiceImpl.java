@@ -1,9 +1,14 @@
-package com.example.colletionsListAndSets;
+package com.example.colletionsListAndSets.Services;
 
+import com.example.colletionsListAndSets.Employee.Employee;
+import com.example.colletionsListAndSets.Exceptions.EmployeeAlreadyAddedException;
+import com.example.colletionsListAndSets.Exceptions.EmployeeNotFountException;
+import com.example.colletionsListAndSets.Exceptions.EmployeeStoragelsFullException;
+import com.example.colletionsListAndSets.Exceptions.InvalidInputException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -22,6 +27,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee add(String firstName, String lastName, Integer salary, Integer department) {
+
+        validateInput(firstName,lastName);
+        firstName = StringUtils.lowerCase(firstName);
+        lastName = StringUtils.lowerCase(lastName);
+        firstName = StringUtils.capitalize(firstName);
+        lastName = StringUtils.capitalize(lastName);
+
         String key = buildKey(firstName, lastName);
         if (employees.containsKey(key)) {
             throw new EmployeeAlreadyAddedException("Employee already exist");
@@ -32,10 +44,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = new Employee(firstName, lastName, salary, department);
         employees.put(key, employee);
         return employee;
+
     }
 
     @Override
     public Employee remove(String firstName, String lastName) {
+        validateInput(firstName,lastName);
         String key = buildKey(firstName, lastName);
         if (employees.containsKey(key)) {
             return employees.remove(key);
@@ -45,6 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee find(String firstName, String lastName) {
+        validateInput(firstName,lastName);
         String key = buildKey(firstName, lastName);
         if (employees.containsKey(key)) {
             return employees.get(key);
@@ -61,9 +76,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     private String buildKey(String firstname, String lastname) {
         return firstname + lastname;
     }
+
     @Override
     public Collection<Employee> getAll() {
         return employees.values();
+    }
+
+    private void validateInput(String firstName,String lastName){
+        if (!StringUtils.isAlpha(firstName) || !StringUtils.isAlpha(lastName)) {
+            throw new InvalidInputException("Incorrect Employee");
+        }
     }
 }
 

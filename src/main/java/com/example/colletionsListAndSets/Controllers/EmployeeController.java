@@ -1,10 +1,10 @@
-package com.example.colletionsListAndSets;
+package com.example.colletionsListAndSets.Controllers;
 
+import com.example.colletionsListAndSets.Employee.Employee;
+import com.example.colletionsListAndSets.Services.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
 
 
 @RestController
